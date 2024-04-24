@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources";
 import { generatePrompt, generatePromptDetermine } from "./prompt";
+import { NotionCourseClient } from "src/Notion/NotionCourseClient";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -13,6 +14,10 @@ const openai = new OpenAI({
  */
 const run = async (name: string, history: ChatCompletionMessageParam[]): Promise<string> => {
 
+    const notion = new NotionCourseClient();
+    const courses = await notion.getCourses();
+    console.log("courses :", courses.toString());
+    
     const promtp = generatePrompt(name)
     const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
