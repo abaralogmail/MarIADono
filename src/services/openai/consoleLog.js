@@ -1,0 +1,1 @@
+console.log("F:\developer\MariaDono\MarIADono\src\services\openai\prompt.ts");
