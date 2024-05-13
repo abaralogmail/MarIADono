@@ -12,13 +12,15 @@ export default BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.WELCOME)
             const history = (state.getMyState()?.history ?? []) as ChatCompletionMessageParam[]
             const ai = await runDetermine(history)
 
-            console.log(`[QUE QUIERES COMPRAR:`,ai.toLowerCase())
-
+            console.log(`[RunDetermine:]`,ai.toLowerCase())
+            console.log(`[history]:`,history)
             if(ai.toLowerCase().includes('unknown')){
+                console.log(`[ERROR]:`,'unknown')
                 return 
             }
 
             if(ai.toLowerCase().includes('chatbot')){
+                console.log(`[CHATBOT]:`,'chatbot')
                 return gotoFlow(chatbotFlow)
             }
             
